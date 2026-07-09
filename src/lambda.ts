@@ -10,13 +10,18 @@ async function getHandler() {
     return cachedHandler;
   }
 
-  const expressApp = express();
-  const app = await createApp(new ExpressAdapter(expressApp));
-  await app.init();
+  try {
+    const expressApp = express();
+    const app = await createApp(new ExpressAdapter(expressApp));
+    await app.init();
 
-  cachedHandler = serverless(expressApp);
+    cachedHandler = serverless(expressApp);
 
-  return cachedHandler;
+    return cachedHandler;
+  } catch (error) {
+    console.error('Failed to initialize Netlify handler', error);
+    throw error;
+  }
 }
 
 export async function handler(event: any, context: any) {

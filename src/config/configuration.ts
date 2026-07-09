@@ -1,7 +1,25 @@
+function resolveDatabaseUri(): string {
+  const databaseUri = process.env.MONGODB_URI;
+  const isServerlessRuntime =
+    process.env.NETLIFY === 'true' ||
+    Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME) ||
+    Boolean(process.env.LAMBDA_TASK_ROOT);
+
+  if (databaseUri) {
+    return databaseUri;
+  }
+
+  if (isServerlessRuntime || process.env.NODE_ENV === 'production') {
+    throw new Error('Missing MONGODB_URI environment variable');
+  }
+
+  return 'mongodb://localhost:27017/gaesde';
+}
+
 export default () => ({
   port: parseInt(process.env.PORT || '3000', 10) || 3000,
   database: {
-    uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/gaesde',
+    uri: resolveDatabaseUri(),
   },
   jwt: {
     secret: process.env.JWT_SECRET || 'super-secret-key-change-this',

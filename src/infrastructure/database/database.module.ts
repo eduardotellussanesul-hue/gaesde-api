@@ -12,8 +12,10 @@ import { UserRoleModule } from '../../application/user-role/user-role.module';
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
         uri: configService.get<string>('database.uri'),
-        retryAttempts: 3,
-        retryDelay: 3000,
+        retryAttempts: 1,
+        retryDelay: 500,
+        serverSelectionTimeoutMS: 5000,
+        connectTimeoutMS: 5000,
       }),
       inject: [ConfigService],
     }),
