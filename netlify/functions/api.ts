@@ -21,7 +21,7 @@ export default withLambda(
 
     if (event.httpMethod === 'OPTIONS') {
       return {
-        statusCode: 204,
+        statusCode: 200,
         headers: corsHeaders,
         body: '',
       };
