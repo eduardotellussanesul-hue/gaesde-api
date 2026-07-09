@@ -1,5 +1,5 @@
 import { Injectable, Inject, ForbiddenException } from '@nestjs/common';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 // Importação correta para pdfkit
 import PDFDocument from 'pdfkit';
 import type { ICertificateRepository } from '../../domain/certificate/certificate.repository.interface';
@@ -312,7 +312,7 @@ export class CertificateService {
   }
 
   private generateVerificationCode(): string {
-    return uuidv4();
+    return randomUUID();
   }
 
   async findById(id: string): Promise<any> {
