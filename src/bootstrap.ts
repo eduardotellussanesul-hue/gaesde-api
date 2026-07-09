@@ -13,7 +13,11 @@ function configureApplication(app: INestApplication) {
     }),
   );
 
-  app.enableCors();
+  app.enableCors({
+    origin: true,
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Authorization', 'Content-Type', 'X-Requested-With'],
+  });
 
   const config = new DocumentBuilder()
     .setTitle('GAESDE API - Gestao de Cursos Online')
