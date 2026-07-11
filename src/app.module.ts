@@ -22,6 +22,7 @@ import { UserAnswerModule } from './application/user-answer/user-answer.module';
 import { AssignmentSubmissionModule } from './application/assignment-submission/assignment-submission.module';
 import { ReviewModule } from './application/review/review.module';
 import { CertificateModule } from './application/certificate/certificate.module';
+import { CommentModule } from './application/comment/comment.module';
 import { JwtAuthGuard } from './infrastructure/auth/guards/jwt-auth.guard';
 import { RolesGuard } from './infrastructure/auth/guards/roles.guard';
 import { HealthController } from './presentation/controllers/health/health.controller';
@@ -50,6 +51,7 @@ import { HealthController } from './presentation/controllers/health/health.contr
     AssignmentSubmissionModule,
     ReviewModule,
     CertificateModule,
+    CommentModule,
   ],
   controllers: [HealthController],
   providers: [
